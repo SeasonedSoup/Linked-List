@@ -7,7 +7,6 @@ class LinkedList {
     append(value) {
         if (this.head === null) {
             this.prepend(value);
-           
         } else {
             let tmp = this.head
             while(tmp.next != null) tmp = tmp.next
@@ -50,9 +49,78 @@ class LinkedList {
     }
 
     at(index) {
-        
+        if (this.head === null || index > size() - 1 || index < 0) {
+            return null
+        } else {
+            let tmp = this.head 
+            let curIndex = 0
+           
+            while (tmp.next != null) {
+                if (index === curIndex) {
+                    return tmp.value
+                }
+                tmp = tmp.next
+                curIndex++;
+            }
+            return null;
+        }
     }
 
+    pop() {
+        if (this.head === null) {
+            return;
+        } 
+        let tmp = this.head 
+        if (tmp.next === null) {
+            this.head = null
+        }
+        while(tmp.next && tmp.next.next != null) {
+            tmp = tmp.next
+        }
+        const value = tmp.next.value
+        tmp.next = null
+        return value
+    }
+
+    contains(value) {
+        if (this.head === null) {
+            return false;
+        } 
+
+        let tmp = this.head 
+        while (tmp != null) {
+            if (tmp.value === value) return true;
+            tmp = tmp.next
+        }
+        return false;
+    }
+
+    find(value) {
+        if (this.head === null) {
+            return null;
+        } 
+        let count = 0;
+        let tmp = this.head
+
+        while (tmp != null) {
+            if (tmp.value === value) return count;
+            tmp = tmp.next
+            count++
+        }
+        return null
+    }
+
+    toString() {
+        let res = ''
+        let tmp = this.head 
+
+        while(tmp!= null) {
+            res += `( ${tmp.val} ) -> `
+            tmp = tmp.next
+        }
+        res += 'null'
+        return res;
+    }
 }
 //contains the value and address to the next node both are empty at the start 
 class Node {
