@@ -142,7 +142,7 @@ export class LinkedList {
     }
 
     removeAt(index) {  
-        if (index >= this.size() - 1 || index < 0) {
+        if (index >= this.size() || index < 0) {
         return new Error('not valid index');
         } else {
             let tmp = this.head; 
