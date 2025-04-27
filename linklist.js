@@ -1,6 +1,6 @@
 
 //represent the full list
-class LinkedList {
+export class LinkedList {
     constructor(head = null) {
         this.head = head
     }
@@ -121,9 +121,47 @@ class LinkedList {
         res += 'null'
         return res;
     }
+
+    insertAt(value, index) {
+        if (index >= this.size() || index < 0) {
+            return new Error('not valid index');
+        }
+        if (index === 0) {
+            this.prepend(value)
+        }
+        let tmp = this.head
+        let curIndex = 0;
+
+        while(tmp!=null) {
+            if (index - 1 === curIndex) {
+                tmp.next = new Node(value, tmp.next)
+            }
+            tmp = tmp.next
+            curIndex++;
+        }
+    }
+
+    removeAt(index) {  
+        if (index >= this.size() - 1 || index < 0) {
+        return new Error('not valid index');
+        } else {
+            let tmp = this.head; 
+
+            if (index === 0) {
+                this.head = this.head.next
+            }
+            let curIndex = 0;
+
+            while(index - 1 > curIndex) {
+                tmp = tmp.next
+                curIndex++
+            } 
+            tmp.next = tmp.next.next
+        }
+    }
 }
 //contains the value and address to the next node both are empty at the start 
-class Node {
+export class Node {
     constructor(val = null, next = null) {
         this.val = val;
         this.next = next;
